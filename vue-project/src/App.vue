@@ -1,32 +1,36 @@
 <!-- Options() API -->
-<script>
+<script setup>
 import { ref } from 'vue';
-export default {
-  setup() {
-    const nome = ref('João Ninguém');
-    const estado = ref('active');
-    const tarefas = ref(['T1', 'T2', 'T3']);
 
-    const toggleStatus = () => {
-      if (estado.value === 'active') {
-        estado.value = 'pending';
-      }
-      else if (estado.value === 'pending') {
-        estado.value = 'inactive';
-      }
-      else {
-        estado.value = 'active';
-      }
-    };
+const nome = ref('João Ninguém');
+const estado = ref('active');
+const tarefas = ref(['T1', 'T2', 'T3']);
+const link = ref(['https://google.com']);
 
-    return {
-      nome,
-      estado,
-      tarefas,
-      toggleStatus
-    };
-  },
-};
+const toggleStatus = () => {
+  if (estado.value === 'active') {
+    estado.value = 'pending';
+  }
+  else if (estado.value === 'pending') {
+    estado.value = 'inactive';
+  }
+  else {
+    estado.value = 'active';
+  }
+}
+
+const adicionarTarefa = () => {
+  if (novaTarefa.value.trim() !== '')
+  {
+    tarefas.value.push(novaTarefa.value);
+    novaTarefa.value = '';
+  }
+}
+
+const deletarTarefa = (index) => {
+  tarefas.value.splice(index, 1);
+}
+
 </script>
 
 <template>
@@ -35,9 +39,22 @@ export default {
   <p v-else-if="estado == 'pending'">User is pending</p>
   <p v-else>User is inactive</p>
 
+  <form @submit.prevent="adicionarTarefa">
+    <label for="adicionarTarefa">Adicionar Tarefa</label>
+    <br/>
+    <input type="text" id="novaTarefa" name="novaTarefa" v-model="novaTarefa"/>
+    <br/>
+    <button type="submit">Enviar</button>
+  </form>
+
   <h3>Tarefas:</h3>
   <ul>
-    <li v-for="tarefa in tarefas" :key="tarefa"> {{ tarefa }}</li>
+    <li v-for="(tarefa, index) in tarefas" :key="tarefa">
+      <span>
+        {{ tarefa }}
+        </span>
+        <button @click="deletarTarefa()"> X </button>
+      </li>
   </ul>
   <a :href="link">Clique para ir ao Google</a>
   <br />
