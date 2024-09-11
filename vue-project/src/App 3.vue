@@ -49,6 +49,7 @@ onMounted(async () => {
   <p v-else-if="estado == 'pending'">User is pending</p>
   <p v-else>User is inactive</p>
 
+  <!-- FORMULÁRIO--> 
   <form @submit.prevent="adicionarTarefa">
     <label for="adicionarTarefa">Adicionar Tarefa</label>
     <br/>
