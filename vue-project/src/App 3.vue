@@ -1,4 +1,4 @@
-<!-- Options() API -->
+<!-- Composition() API -->
 <script setup>
 import { onMounted, ref } from 'vue';
 
@@ -64,7 +64,7 @@ onMounted(async () => {
       <span>
         {{ tarefa }}
         </span>
-        <button @click="deletarTarefa()"> X </button>
+        <button @click="deletarTarefa(index)"> X </button>
       </li>
   </ul>
   <a :href="link">Clique para ir ao Google</a>
