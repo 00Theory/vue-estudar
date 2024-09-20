@@ -1,6 +1,7 @@
 <script setup>
 import { defineProps } from 'vue';
 
+//Props
 defineProps({
     title: {
         type: String,
